@@ -1,12 +1,21 @@
 package pages;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class BranchesPage extends BtlBasePage {
 
+    @FindBy(xpath = "//div[@class='opener-bg ']/h1")
+    private WebElement pageTitle;
+
+    @FindBy(xpath = "//a[@class='SnifName']")
+    private WebElement firstBranchLink;
+
     public BranchesPage(WebDriver driver) {
         super(driver);
+        PageFactory.initElements(driver, this);
     }
 
     @Override
@@ -14,11 +23,11 @@ public class BranchesPage extends BtlBasePage {
     }
 
     public String getPageTitle() {
-        return driver.findElement(By.xpath("//div[@class='opener-bg ']/h1")).getText();
+        return pageTitle.getText();
     }
 
     public BranchInfoPage clickOnFirstBranch() {
-        driver.findElement(By.xpath("//a[@class='SnifName']")).click();
+        firstBranchLink.click();
         return new BranchInfoPage(driver);
     }
 }

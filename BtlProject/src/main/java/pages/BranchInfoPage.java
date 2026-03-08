@@ -1,12 +1,24 @@
 package pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class BranchInfoPage extends BtlBasePage {
 
+    @FindBy(xpath = "//ul[@class='SnifDetails']//label[contains(text(), 'כתובת')]")
+    private WebElement addressLabel;
+
+    @FindBy(xpath = "//ul[@class='SnifDetails']//label[contains(text(), 'קבלת קהל')]")
+    private WebElement receptionLabel;
+
+    @FindBy(xpath = "//ul[@class='SnifDetails']//label[contains(text(), 'מענה טלפוני')]")
+    private WebElement phoneResponseLabel;
+
     public BranchInfoPage(WebDriver driver) {
         super(driver);
+        PageFactory.initElements(driver, this);
     }
 
     @Override
@@ -15,7 +27,7 @@ public class BranchInfoPage extends BtlBasePage {
 
     public boolean isAddressDisplayed() {
         try {
-            return driver.findElement(By.xpath("//ul[@class='SnifDetails']//label[contains(text(), 'כתובת')]")).isDisplayed();
+            return addressLabel.isDisplayed();
         } catch (Exception e) {
             return false;
         }
@@ -23,7 +35,7 @@ public class BranchInfoPage extends BtlBasePage {
 
     public boolean isReceptionDisplayed() {
         try {
-            return driver.findElement(By.xpath("//ul[@class='SnifDetails']//label[contains(text(), 'קבלת קהל')]")).isDisplayed();
+            return receptionLabel.isDisplayed();
         } catch (Exception e) {
             return false;
         }
@@ -31,7 +43,7 @@ public class BranchInfoPage extends BtlBasePage {
 
     public boolean isPhoneResponseDisplayed() {
         try {
-            return driver.findElement(By.xpath("//ul[@class='SnifDetails']//label[contains(text(), 'מענה טלפוני')]")).isDisplayed();
+            return phoneResponseLabel.isDisplayed();
         } catch (Exception e) {
             return false;
         }
